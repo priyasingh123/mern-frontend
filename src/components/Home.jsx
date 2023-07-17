@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import noteContext from '../context/notes/noteContext'
+import noteContext from '../context/notes/NoteContext'
 import Notes from '../components/Notes' 
 
 export default function Home() {
@@ -22,7 +22,7 @@ export default function Home() {
 
   return (
     <>
-    <div className='container my-3'>
+    <div className='container' style={{ marginTop: '30px' }}>
       <h2>Add your Note</h2>
       <form>
         <div className="mb-3">

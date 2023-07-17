@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function Alert() {
+export default function Alert(props) {
     return (
-        <div className="alert alert-danger" role="alert">
-            Do you want to delete 
+        <div className={`alert alert-${props?.alert?.type}`} role="alert">
+            {props?.alert?.msg}
         </div>
     )
 }

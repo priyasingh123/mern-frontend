@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect } from 'react'
-import noteContext from '../context/notes/noteContext'
+import noteContext from '../context/notes/NoteContext'
 import {Link } from 'react-router-dom'
 import ConfirmUpdate from './ConfirmUpdate'
 

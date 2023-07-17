@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import {Link, useLocation} from 'react-router-dom'
 
-export default function Navbar() {
+export default function Navbar(props) {
     let location = useLocation();
 
     useEffect(() => {
@@ -9,7 +9,7 @@ export default function Navbar() {
     }, [location])
     return (
         <div>
-            <nav className="navbar navbar-expand-lg bg-dark navbar-dark">
+            <nav className="navbar navbar-expand-lg bg-dark navbar-dark fixed-top">
                 <div className="container-fluid">
                     <Link className="navbar-brand" to="/">Navbar</Link>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -26,8 +26,9 @@ export default function Navbar() {
                         </ul>
                     </div>
                     <form className='d-flex'>
-                        <Link className='btn btn-primary mx-2' to='/signup'>Sign Up</Link>
-                        <Link className='btn btn-primary mx-2' to='/login'>Log In</Link>
+                        {!props.isLogin && <Link className='btn btn-primary mx-2' to='/signup'>Sign Up</Link>}
+                        {!props.isLogin && <Link className='btn btn-primary mx-2' to='/login'>Log In</Link>}
+                        {props.isLogin && <Link className='btn btn-danger mx-2' to='/logout'>Log Out</Link>}
 
                     </form>
                 </div>
