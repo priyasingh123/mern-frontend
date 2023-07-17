@@ -1,12 +1,10 @@
 import React, { useState , useEffect} from 'react'
 import {useNavigate} from 'react-router-dom'
-import LoginContext from '../context/login/LoginContext'
 
 const LogIn = (props) => {
   // const host = process.env.REACT_APP_HOST
   const [credentials, setCredentials] = useState({email: '', password:''})
   let navigate = useNavigate()
-  const loginContext = useContext (LoginContext)
 
   useEffect (() => {
     setCredentials({email: '', password:''})
