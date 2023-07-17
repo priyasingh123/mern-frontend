@@ -1,13 +1,12 @@
 import React, { useEffect } from 'react'
 
 export default function LogOut(props) {
-    useEffect ((props) => {
-        props?.changeLogin(false, 'from logout')
-        console.log ('logout')
+    useEffect (() => {
         localStorage.removeItem('token')
-    },[props.changeLogin])
+        props.changeLogin(false, 'from login')
+    },)
   return (
-    <div className="container text-center" style={{ marginTop: '30px' }}>
+    <div className="container text-center" style={{ marginTop: '60px' }}>
       <h4>You have successfully logged Out</h4>
     </div>
   )

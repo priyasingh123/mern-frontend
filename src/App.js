@@ -9,7 +9,6 @@ import LogIn from './components/LogIn';
 import SignUp from './components/SignUp';
 import Alert from './components/Alert';
 import LogOut from './components/LogOut';
-import LoginState from './context/login/LoginState';
 
 function App() {
   const [alert, setAlert] = useState(null)
@@ -30,20 +29,20 @@ function App() {
   }
 
   return (
-
-    <NoteState>
       <Router>
         <Navbar isLogin={loggedIn} />
         <Alert alert={alert} />
+        <NoteState>
         <Routes>
-          <Route exact path="/" element={<Home />}></Route>
+          <Route exact path="/" element={<Home showAlert={showAlert}/>}></Route>
           <Route exact path="/about" element={<About />}></Route>
           <Route exact path='/login' element={<LogIn changeLogin={changeLogin} showAlert={showAlert} />}></Route>
           <Route exact path='/signup' element={<SignUp showAlert={showAlert} />}></Route>
-          <Route exact path='/logout' element={<LogOut changeLogin={changeLogin} />}></Route>
+          <Route exact path='/logout' element={<LogOut changeLogin={changeLogin}/>}></Route>
         </Routes>
-      </Router>
+        
       </NoteState>
+      </Router>
     
   );
 }

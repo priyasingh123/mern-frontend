@@ -24,20 +24,21 @@ const LogIn = (props) => {
       })
       if (res.status === 200) {
         const json = await res.json()
-        // props.changeLogin(true, 'from login')
+        props.changeLogin(true, 'from login')
 
         //save the authToken and redirect
         localStorage.setItem('token',json.authToken)
         navigate('/')
+        props.showAlert ('Logged In Successfully', 'success')
       }
       else {
         props.showAlert ('Not correct User', 'danger')
-        setCredentials({email: '', password:''})
       }
     } catch (error) {
         console.log (error)
-        setCredentials({email: '', password:''})
-    }
+        props.showAlert ('Some Error Occured', 'danger')
+      }
+    setCredentials({email: '', password:''})
   }
 
   const onChangeEvent = (e) => {
@@ -45,7 +46,7 @@ const LogIn = (props) => {
   }
 
   return (
-    <div className='container' style={{ marginTop: '30px' }}>
+    <div className='container' style={{ marginTop: '60px' }}>
       <h2 className='my-3'>LogIn</h2>
       <form onSubmit={onSubmission}>
         <div className="form-group">

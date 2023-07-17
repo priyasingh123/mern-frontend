@@ -23,6 +23,7 @@ const SignUp = (props) => {
                 // eslint-disable-next-line
                 const json = res.json()
                 navigate('/login')
+                props.showAlert ('Account created successfully','success')
             }
             else {
                 props.showAlert ('SignUp Failed', 'danger')
@@ -35,7 +36,7 @@ const SignUp = (props) => {
     }
 
     return (
-        <div className='container' style={{ marginTop: '30px' }}>
+        <div className='container' style={{ marginTop: '60px' }}>
             <h2>Sign Up</h2>
             <form onSubmit={onSubmission}>
                 <div className="form-group">

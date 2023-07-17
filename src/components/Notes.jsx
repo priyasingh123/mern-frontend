@@ -1,16 +1,24 @@
 import { useContext, useState, useEffect } from 'react'
 import noteContext from '../context/notes/NoteContext'
-import {Link } from 'react-router-dom'
+import {Link, useNavigate } from 'react-router-dom'
 import ConfirmUpdate from './ConfirmUpdate'
 
-const Notes = () => {
+const Notes = (props) => {
     const context = useContext(noteContext)
     const {notes, deleteNote, getAllNotes} = context
+    const navigate = useNavigate()
 
     const [updatedNote, setUpdatedNote] = useState ({'title':'', 'description':'','tag':''})
 
-    const onDeleteNote = (id) => {
-        deleteNote(id)
+    const onDeleteNote = async (id) => {
+        console.log ('ID is',id)
+        let res = await deleteNote(id)
+        if (res === 200) {
+            props.showAlert ('Deleted Successfully', 'success')
+        }
+        else {
+            props.showAlert (`Could not delete`, 'danger')
+        }
     }
 
     const onUpdateClick = (note) => {
@@ -19,15 +27,20 @@ const Notes = () => {
     }
 
     useEffect(() => {
-        getAllNotes()
-        // eslint-disable-next-line
+        if (localStorage.getItem('token') !== null) {
+            getAllNotes()
+        }
+        else {
+            props.showAlert (`Please Login First`, 'warning')
+            navigate ('/login')
+        }
     },[])
 
     return (<>
-        <div className="container my-3">
+        <div className="container my-3" >
             <h2>Your Notes</h2>
             <div className='container'>
-                {notes.length === 0 && 'No Notes to display'}
+                {notes?.length === 0 && 'No Notes to display'}
                 <div className="row">
                     {notes?.map((note, index) => {
                         return (

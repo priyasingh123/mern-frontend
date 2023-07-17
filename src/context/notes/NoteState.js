@@ -12,47 +12,46 @@ const NoteState = (props) => {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          'auth-token':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjRhZTE0MDFmY2M4NmNiMTQ3MTc3N2FhIn0sImlhdCI6MTY4OTM4OTIzM30.XWpZSU-ekR_0x3wFR9ymn-4aF3xDjJkIl9asRI5tSD4'
+          'auth-token': localStorage.getItem('token')
         }
       })
-      if (res.status) {
+      if (res.status === 200) {
         const json = await res.json()
         setNotes(json)
       }
       else {
         console.log ('Some error occured')
       }
-     
     } catch (error) {
       console.log (error)
     }
-    
   }
 
   //add a note
   const addNote = async (note) => {
     //API call
-    console.log ('NOTE ',JSON.stringify(note))
     try {
       let res = await fetch(`${host}/api/notes/addnote`, {
         method: "POST",
         headers: {
           'Content-Type': 'application/json',
-          'auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjRhZTE0MDFmY2M4NmNiMTQ3MTc3N2FhIn0sImlhdCI6MTY4OTIzMTcyNX0.eXX1uUkvKNnKCAuIRQk0sAKGyNRS7WXtQFt5Xvya-HE'
+          'auth-token': localStorage.getItem('token')
         },
         body: JSON.stringify(note)
       })
-      console.log ('RESPONSE ',res)
       if (res.status === 200) {
-        setNotes(...notes, note)
+        setNotes([...notes, note])
+        return (200)
       }
       else {
         console.log('Error occured')
+        return (400)
       }
     } catch (error) {
-        console.log(error.message)
+      console.log(error.message)
+      return (500)
     }
-    setNotes([...notes, note])
+    
   }
 
   //delete a note
@@ -62,20 +61,22 @@ const NoteState = (props) => {
         method: "DELETE",
         headers: {
           'Content-Type': 'application/json',
-          'auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjRhZTE0MDFmY2M4NmNiMTQ3MTc3N2FhIn0sImlhdCI6MTY4OTIzMTcyNX0.eXX1uUkvKNnKCAuIRQk0sAKGyNRS7WXtQFt5Xvya-HE'
+          'auth-token': localStorage.getItem('token')
         }
       })
-      console.log ('RESPONSE ',res)
       if (res.status === 200) {
         setNotes(notes.filter(note => {
           return note._id !== id
         }))
+        return (200)
       }
       else {
         console.log('Error occured')
+        return (400)
       }
     } catch (error) {
       console.log(error.message)
+      return (500)
     }
 
   }
