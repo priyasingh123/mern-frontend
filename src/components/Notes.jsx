@@ -3,7 +3,7 @@ import noteContext from '../context/notes/NoteContext'
 import {Link } from 'react-router-dom'
 import ConfirmUpdate from './ConfirmUpdate'
 
-const Notes = (props) => {
+const Notes = () => {
     const context = useContext(noteContext)
     const {notes, deleteNote, getAllNotes} = context
 

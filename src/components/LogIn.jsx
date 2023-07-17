@@ -1,15 +1,18 @@
 import React, { useState , useEffect} from 'react'
 import {useNavigate} from 'react-router-dom'
+import LoginContext from '../context/login/LoginContext'
 
 const LogIn = (props) => {
   // const host = process.env.REACT_APP_HOST
+  const [credentials, setCredentials] = useState({email: '', password:''})
+  let navigate = useNavigate()
+  const loginContext = useContext (LoginContext)
+
   useEffect (() => {
     setCredentials({email: '', password:''})
 
   },[])
-  const [credentials, setCredentials] = useState({email: '', password:''})
 
-  let navigate = useNavigate()
   const onSubmission = async (e) => {
     e.preventDefault()
     //API call for login
@@ -23,12 +26,11 @@ const LogIn = (props) => {
       })
       if (res.status === 200) {
         const json = await res.json()
-        props.changeLogin(true, 'from login')
+        // props.changeLogin(true, 'from login')
+
         //save the authToken and redirect
-        console.log ('json ',json)
         localStorage.setItem('token',json.authToken)
         navigate('/')
-
       }
       else {
         props.showAlert ('Not correct User', 'danger')

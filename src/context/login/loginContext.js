@@ -1,5 +1,5 @@
 import {createContext} from 'react'
 
-loginContext = createContext()
+const LoginContext = createContext()
 
-export default loginContext
+export default LoginContext

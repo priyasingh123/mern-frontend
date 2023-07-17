@@ -1,11 +1,11 @@
 import React, { useContext, useState } from 'react'
-import noteContext from '../context/notes/NoteContext'
+import NoteContext from '../context/notes/NoteContext'
 import Notes from '../components/Notes' 
 
 export default function Home() {
 
   /*for using noteContext, call useContext*/
-  const context = useContext(noteContext)
+  const context = useContext(NoteContext)
   const { addNote} = context
 
   /*set one note to empty and then update it with values user has entered*/
